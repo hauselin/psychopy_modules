@@ -1,9 +1,10 @@
 import os
 from psychopy import core
 
-x = 4
+x = 55
 
-print(x)
+
+
 
 y = 5
-print("hello world")
+print('hello world')
