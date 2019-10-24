@@ -5,18 +5,18 @@ import os
 print(os.getcwd())
 
 from psychopy import core
-# import scripts
-# from scripts import s1
-# from scripts import s2
+import scripts
+from scripts import s1
+from scripts import s2
 
-import os
+# import os
 # doesn't work
 # os.rename('data/abc.txt', '/Volumes/inzlicht-shared/Behavioural/Computer 1/test/abc.txt')
 
 # https://stackoverflow.com/questions/26765130/how-can-i-move-files-between-mounts-using-python
 # https://www.codespeedy.com/difference-between-os-rename-and-shutil-move-in-python/
-import shutil # works
-shutil.copy('data/abc.txt', '/Volumes/inzlicht-shared/Behavioural/Computer 1/test/abc.txt')
+# import shutil # works
+# shutil.copy('data/abc.txt', '/Volumes/inzlicht-shared/Behavioural/Computer 1/test/abc.txt')
 # os.rename('data/abc.txt', "/Users/hause/Desktop/untitled folder/abc.txt")
 
 # import importlib

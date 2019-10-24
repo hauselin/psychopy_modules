@@ -10,3 +10,7 @@
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
+# ignore psychopy cache
+./psychopy_test/__pycache__/
+./psychopy_test/scripts/__pycache__/
