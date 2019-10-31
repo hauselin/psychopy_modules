@@ -1,5 +1,7 @@
 from psychopy import visual, core
 
+
+
 # Create a visual window:
 win = visual.Window(size=(600,600), color='black')
 
