@@ -1,5 +1,3 @@
-# psychopy_modules
+# exp for psychopy
 
-
-
-# our second commit
+Just stuff for psychopy
