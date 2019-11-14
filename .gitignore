@@ -5,19 +5,12 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
-.DS_Store
+*.DS_Store
 
-
-scratch.py
+*scratch.py
 
 # Byte-compiled / optimized / DLL files
-__pycache__/
-
 # ignore psychopy cache
-./psychopy_test/__pycache__/
-./psychopy_test/scripts/__pycache__/
-<<<<<<< HEAD
-=======
-
-.ipynb_checkpoints
->>>>>>> 46c7ff574195b42ccfad75620da0fbbbdf233ace
+__pycache__/
+*__pycache__/
+*.ipynb_checkpoints
