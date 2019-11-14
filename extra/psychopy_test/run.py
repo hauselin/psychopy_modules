@@ -1,12 +1,16 @@
 # https://www.knowledgehut.com/blog/programming/run-python-scripts
 # https://discourse.psychopy.org/t/open-experiments-using-code-in-a-preceding-experiment/1066/4
 
-import os 
+import os
 print(os.getcwd())
 
 from psychopy import core
 import scripts
+
+# run script 1
 from scripts import s1
+
+# run script 2
 from scripts import s2
 
 # import os

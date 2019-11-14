@@ -16,3 +16,8 @@ __pycache__/
 # ignore psychopy cache
 ./psychopy_test/__pycache__/
 ./psychopy_test/scripts/__pycache__/
+<<<<<<< HEAD
+=======
+
+.ipynb_checkpoints
+>>>>>>> 46c7ff574195b42ccfad75620da0fbbbdf233ace

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from importlib import reload
 import exp
 from exp import instruct
@@ -27,3 +28,18 @@ instruct.expobj['win']
 instruct.expobj['name']
 
 # show_instructions(['page1', "page2"])
+=======
+#%% 
+
+refreshrate = 60
+print(1000 / 60 * np.arange(1, 61))
+
+# ms
+time2wait_ms = 2000 / 1 / refreshrate
+time2wait_f = 
+text = ["hey", "how are you?", "press space to continue", "abc"]
+
+for t in text:
+    print(t)
+
+>>>>>>> 46c7ff574195b42ccfad75620da0fbbbdf233ace
