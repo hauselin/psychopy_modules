@@ -60,15 +60,20 @@ def show_instructions(text, timeBeforeAutomaticProceed=0, timeBeforeShowingSpace
 ## TODO: instruction class; add background image?
 class Instructions(object):
     
-    def __init__(self, exp_objects, text=["Welcome to our study!"], image=None):
+    def __init__(self, exp_objects, text=["INSERT YOUR TEXT HERES"], image=None):
         """[summary]
         
         Args:
-            text (list, optional): [description]. Defaults to ["Welcome to our study!"].
+            exp_objects ([type]): [description]
+            text (list, optional): [description]. Defaults to ["INSERT YOUR TEXT HERES"].
+            image ([type], optional): [description]. Defaults to None.
         """
         self.text = text
         self.exp_objects = exp_objects
         self.image = None
+
+        self.exp_objects["txt_space_continue"] = visual.TextStim(win=self.exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text="Press space to continue", height=0.04, wrapWidth=1.4, pos=[0.0, 0.0])
+        self.exp_objects["txt_instructions"] = visual.TextStim(win=self.exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text='DEFAULT', height=0.08, wrapWidth=1.4, pos=[0.0, 0.5])
 
     def set_text(self, text):
         """[summary]
@@ -134,7 +139,7 @@ class Instructions(object):
                 utils.check_quit(self.exp_objects['win'], self.exp_objects["quit_keys"], self.exp_objects["dataraw_dir"])
         self._wait()
 
-    def wait_show(self, secs_to_wait=1, text=None):
+    def wait_show_space(self, secs_to_wait=1, text=None):
         """[summary]
         
         Args:
@@ -143,5 +148,17 @@ class Instructions(object):
         """
         if text is not None:
             self.set_text(text)
-        self._wait(secs_to_wait)
-        self.show_wait()
+        self.exp_objects['mouse'].setVisible(0)
+        event.clearEvents()
+        for t in self.text:
+            instruct_timer = core.Clock()
+            self.exp_objects["txt_instructions"].setText(t)
+            while not event.getKeys(keyList=['space']):
+                self.exp_objects["txt_instructions"].draw()
+                if instruct_timer.getTime() > secs_to_wait:
+                    self.exp_objects["txt_space_continue"].draw()    
+                self.exp_objects['win'].flip()
+                if event.getKeys(self.exp_objects["skip_keys"]):
+                    return None
+                utils.check_quit(self.exp_objects['win'], self.exp_objects["quit_keys"], self.exp_objects["dataraw_dir"])
+        self._wait()

@@ -24,9 +24,6 @@ exp_objects['mouse'].setVisible(0)  # make mouse invisible
 
 #%% show instructions
 
-exp_objects["txt_space_continue"] = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text="Press space to continue", height=0.04, wrapWidth=1.4, pos=[0.0, 0.0])
-exp_objects["txt_instructions"] = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text='DEFAULT', height=0.08, wrapWidth=1.4, pos=[0.0, 0.5])
-
 instructions = instruct.Instructions(exp_objects, ["hey11", "hey12", "hey13"])
 instructions.show_wait()
 instructions.show_wait(text=["a", "b", "c"])
@@ -35,7 +32,7 @@ instructions.set_text(["new1", "new2"])
 instructions.show_automatic()
 instructions.show_automatic(text=["e", "f"])
 
-instructions.wait_show(text=["abc", "cde"])
+instructions.wait_show_space(text=["abc", "cde"])
 
 #%% test tasks
 
