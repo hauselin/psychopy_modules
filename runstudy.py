@@ -22,8 +22,6 @@ exp_objects['mouse'].setVisible(0)  # make mouse invisible
 exp_objects["txt_space_continue"] = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text="Press space to continue", height=0.04, wrapWidth=1.4, pos=[0.0, 0.0])
 exp_objects["txt_instructions"] = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text='DEFAULT', height=0.08, wrapWidth=1.4, pos=[0.0, 0.5])
 
-stroop.run_task(exp_objects)
-
 instructions = instruct.Instructions(exp_objects, ["hey11", "hey12", "hey13"])
 instructions.show_wait()
 instructions.show_wait(text=["a", "b", "c"])
@@ -34,7 +32,12 @@ instructions.show_automatic(text=["e", "f"])
 
 instructions.wait_show(text=["abc", "cde"])
 
-utils.movefiles(exp_objects["dataraw_dir"])
+#%% test stroop module
+
+stroop.run_task(exp_objects)
+
+#%% finis 
 
 exp_objects['win'].close()
+utils.movefiles(exp_objects["dataraw_dir"])
 core.quit()
