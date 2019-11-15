@@ -1,4 +1,5 @@
 from psychopy import event, visual, core
+from . import utils
 
 ## TODO: change to a class rather than function?
 def show_instructions(text, timeBeforeAutomaticProceed=0, timeBeforeShowingSpace=0):
@@ -56,78 +57,92 @@ def show_instructions(text, timeBeforeAutomaticProceed=0, timeBeforeShowingSpace
         exp_objects['win'].flip()  # wait at the end of the block
         
 
-## TODO: intruction class
+## TODO: instruction class; add background image?
 class Instructions(object):
     
-    def __init__(self, text=["Welcome to our study!"]):
+    def __init__(self, exp_objects, text=["Welcome to our study!"], image=None):
         """[summary]
         
         Args:
             text (list, optional): [description]. Defaults to ["Welcome to our study!"].
         """
         self.text = text
+        self.exp_objects = exp_objects
+        self.image = None
 
-    ## TODO: maybe switch to use generator rather than loop?
-    def _show(self):
+    def set_text(self, text):
+        """[summary]
+        
+        Args:
+            text ([type]): [description]
+        """
+        self.text = text
+
+    def _wait(self, secs=0.5):
+        """[summary]
+        
+        Args:
+            secs (float, optional): [description]. Defaults to 0.5.
+        """
+        for _ in range(int(secs * self.exp_objects["screen_hz"])):  # brief pause
+            self.exp_objects['win'].flip()
+
+    def show_wait(self, text=None):
         """[summary]
         
         Returns:
             [type]: [description]
         """
-        for t in self.text:
-            exp_objects["txt_instructions"].text = t
-            while not event.getKeys(keyList=['space']):
-                exp_objects["txt_space_continue"].draw()
-                exp_objects["txt_instructions"].draw()
-                exp_objects['win'].flip()
-                if event.getKeys(keyList=['backslash']):
-                    exp_objects['win'].close()
-                    core.quit()
-                elif event.getKeys(['bracketright']): #if press 7, skip to next block
-                    return None
 
-    def _wait(secs=0.5):
-        for _ in range(int(0.5 * exp_objects["screen_hz"])):  # brief pause
-            exp_objects['win'].flip()
-
-    def show_wait(self):
-        """[summary]
-        
-        Returns:
-            [type]: [description]
-        """
-        exp_objects['mouse'].setVisible(0)
+        if text is not None:
+            self.set_text(text)
+        self.exp_objects['mouse'].setVisible(0)
         event.clearEvents()
         for t in self.text:
-            exp_objects["txt_instructions"].setText(t)
+            self.exp_objects["txt_instructions"].setText(t)
             while not event.getKeys(keyList=['space']):
-                exp_objects["txt_space_continue"].draw()
-                exp_objects["txt_instructions"].draw()
-                exp_objects['win'].flip()
-                if event.getKeys(keyList=['backslash']):
-                    exp_objects['win'].close()
-                    core.quit()
-                elif event.getKeys(['bracketright']): 
+                self.exp_objects["txt_space_continue"].draw()
+                self.exp_objects["txt_instructions"].draw()
+                self.exp_objects['win'].flip()
+                if event.getKeys(self.exp_objects["skip_keys"]):
                     return None
+                utils.check_quit(self.exp_objects['win'], self.exp_objects["quit_keys"], self.exp_objects["dataraw_dir"])
         self._wait()
 
-    def show_automatic(self, secs_to_wait=1):
-        exp_objects['mouse'].setVisible(0)
+    def show_automatic(self, secs_to_wait=1, text=None):
+        """[summary]
+        
+        Args:
+            secs_to_wait (int, optional): [description]. Defaults to 1.
+            text ([type], optional): [description]. Defaults to None.
+        
+        Returns:
+            [type]: [description]
+        """
+        if text is not None:
+            self.set_text(text)
+        self.exp_objects['mouse'].setVisible(0)
         event.clearEvents()
         for t in self.text:
-            exp_objects["txt_instructions"].setText(t)
-            exp_objects["txt_instructions"].setAutoDraw(True)
+            self.exp_objects["txt_instructions"].setText(t)
+            self.exp_objects["txt_instructions"].setAutoDraw(True)
             instruct_timer = core.Clock()
             while instruct_timer.getTime() < secs_to_wait:
-                exp_objects['win'].flip()
-                if event.getKeys(keyList=['backslash']):
-                    exp_objects['win'].close()
-                    core.quit()
-                elif event.getKeys(['bracketright']): 
+                self.exp_objects['win'].flip()
+                if event.getKeys(self.exp_objects["skip_keys"]):
                     return None
-            exp_objects["txt_instructions"].setAutoDraw(False)
+                utils.check_quit(self.exp_objects['win'], self.exp_objects["quit_keys"], self.exp_objects["dataraw_dir"])
+            self.exp_objects["txt_instructions"].setAutoDraw(False)
         self._wait()
 
-    def wait_show(self, secs_to_wait=1):
-        exp_objects['mouse'].setVisible(0)
-        event.clearEvents()
+    def wait_show(self, secs_to_wait=1, text=None):
+        """[summary]
+        
+        Args:
+            secs_to_wait (int, optional): [description]. Defaults to 1.
+            text ([type], optional): [description]. Defaults to None.
+        """
+        if text is not None:
+            self.set_text(text)
+        self._wait(secs_to_wait)
+        self.show_wait()
