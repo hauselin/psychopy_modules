@@ -125,14 +125,13 @@ class Instructions(object):
         event.clearEvents()
         for t in self.text:
             self.exp_objects["txt_instructions"].setText(t)
-            self.exp_objects["txt_instructions"].setAutoDraw(True)
             instruct_timer = core.Clock()
             while instruct_timer.getTime() < secs_to_wait:
+                self.exp_objects["txt_instructions"].draw()
                 self.exp_objects['win'].flip()
                 if event.getKeys(self.exp_objects["skip_keys"]):
                     return None
                 utils.check_quit(self.exp_objects['win'], self.exp_objects["quit_keys"], self.exp_objects["dataraw_dir"])
-            self.exp_objects["txt_instructions"].setAutoDraw(False)
         self._wait()
 
     def wait_show(self, secs_to_wait=1, text=None):

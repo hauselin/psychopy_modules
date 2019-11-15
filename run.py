@@ -11,7 +11,7 @@ from psychopy import visual, core, event, data, gui, logging, monitors, sound
 
 from importlib import reload
 from exp import instruct, utils
-from tasks import stroop
+from tasks import stroop, flanker
 reload(instruct)
 reload(utils)
 
@@ -37,9 +37,10 @@ instructions.show_automatic(text=["e", "f"])
 
 instructions.wait_show(text=["abc", "cde"])
 
-#%% test stroop module
+#%% test tasks
 
 stroop.run_task(exp_objects)
+flanker.run_task(exp_objects)
 
 #%% finish
 
