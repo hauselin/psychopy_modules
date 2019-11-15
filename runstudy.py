@@ -6,10 +6,10 @@ from psychopy import visual, core, event, data, gui, logging, monitors, sound
 
 from importlib import reload
 from exp import instruct
+from exp import utils
 reload(instruct)
 
-
-exp_objects = {"screen_hz": 60, "fullscreen": False, "monitor": 'testMonitor'}
+exp_objects = {"screen_hz": 60, "fullscreen": False, "monitor": 'testMonitor', "dataraw_dir": "dataraw_test"}
 
 exp_objects['win'] = visual.Window(size=(1300, 1000), fullscr=exp_objects['fullscreen'], units='norm', monitor=exp_objects['monitor'], colorSpace='rgb', color=(-1, -1, -1)) # create window
 
@@ -28,6 +28,8 @@ instruct_begin = instruct.Instructions(["hey11", "hey12", "hey13"])
 instruct_begin.show_wait()
 instruct_begin.show_automatic()
 instruct_begin.wait_show() # not implemented yet
+
+utils.movefiles(exp_objects["dataraw_dir"])
 
 exp_objects['win'].close()
 core.quit()
