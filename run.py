@@ -1,3 +1,9 @@
+"""
+Use this file to run tasks/experiments.
+DO NOT EDIT unless you know what you're doing!
+"""
+
+
 import pandas as pd
 import numpy as np
 import random, os, time
@@ -36,7 +42,7 @@ instructions.wait_show(text=["abc", "cde"])
 
 stroop.run_task(exp_objects)
 
-#%% finis 
+#%% finish
 
 exp_objects['win'].close()
 utils.movefiles(exp_objects["dataraw_dir"])

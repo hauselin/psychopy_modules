@@ -10,3 +10,10 @@
 
 `runstudy.py`: main python file to run experiments contained in `tasks`
 
+
+
+## How to run tasks in PsychoPy coder?
+
+Open PsychoPy coder, load the `run.py` file in coder, and click the green icon to run the task.
+
+![psychopy_coder](./extra/psychopy_coder.jpg)
