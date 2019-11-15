@@ -8,7 +8,7 @@
 
 `tasks`: modules for running different tasks
 
-`runstudy.py`: main python file to run experiments contained in `tasks`
+`run.py`: main python file to run experiments contained in `tasks`
 
 
 
