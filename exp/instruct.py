@@ -1,9 +1,4 @@
-# from psychopy import event, visual
-def hey2():
-    print(xyz)
-
-def saysomething():
-    print(sayhi)
+from psychopy import event, visual, core
 
 def show_instructions(text, timeBeforeAutomaticProceed=0, timeBeforeShowingSpace=0):
     '''Show instructions.
@@ -11,19 +6,22 @@ def show_instructions(text, timeBeforeAutomaticProceed=0, timeBeforeShowingSpace
     timeBeforeAutomaticProceed: The time in seconds to wait before proceeding automatically.
     timeBeforeShowingSpace: The time in seconds to wait before showing 'Press space to continue' text.
     '''
-    mouse.setVisible(0)
+    exp_objects['mouse'].setVisible(0)
     event.clearEvents()
     # 'Press space to continue' text for each 'page'
-    continueText = visual.TextStim(win=win, units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text="Press space to continue", height=0.04, wrapWidth=1.4, pos=[0.0, 0.0])
+    continueText = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text="Press space to continue", height=0.04, wrapWidth=1.4, pos=[0.0, 0.0])
     # instructions to be shown
-    instructText = visual.TextStim(win=win, units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text='DEFAULT', height=0.08, wrapWidth=1.4, pos=[0.0, 0.5])
+    instructText = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text='DEFAULT', height=0.08, wrapWidth=1.4, pos=[0.0, 0.5])
+    
     for i in range(len(text)): # for each item/page in the text list
         instructText.text = text[i] # set text for each page
         if timeBeforeAutomaticProceed == 0 and timeBeforeShowingSpace == 0:
             while not event.getKeys(keyList=['space']):
-                continueText.draw(); instructText.draw();  win.flip()
+                continueText.draw()
+                instructText.draw();
+                exp_objects['win'].flip()
                 if event.getKeys(keyList=['backslash']):
-                    win.close()
+                    exp_objects['win'].close()
                     core.quit()
                 elif event.getKeys(['bracketright']): #if press 7, skip to next block
                     return None
@@ -33,22 +31,24 @@ def show_instructions(text, timeBeforeAutomaticProceed=0, timeBeforeShowingSpace
             instructTimer = core.Clock()
             while instructTimer.getTime() < timeBeforeAutomaticProceed:
                 if event.getKeys(keyList=['backslash']):
-                    win.close()
+                    exp_objects['win'].close()
                     core.quit()
                 elif event.getKeys(['bracketright']):
                     return None
-                instructText.draw(); win.flip()
+                instructText.draw(); exp_objects['win'].flip()
         elif timeBeforeAutomaticProceed == 0 and timeBeforeShowingSpace != 0:
             instructTimer = core.Clock()
             while instructTimer.getTime() < timeBeforeShowingSpace:
                 if event.getKeys(keyList=['backslash']):
-                    win.close()
+                    exp_objects['win'].close()
                     core.quit()
                 elif event.getKeys(['bracketright']):
                     return None
-                instructText.draw(); win.flip()
-            win.flip(); event.clearEvents()
+                instructText.draw()
+                exp_objects['win'].flip()
+            exp_objects['win'].flip()
+            event.clearEvents()
     instructText.setAutoDraw(False)
     continueText.setAutoDraw(False)
     for _ in range(30):
-        win.flip() # wait at the end of the block
+        exp_objects['win'].flip() # wait at the end of the block
