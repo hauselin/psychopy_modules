@@ -1,5 +1,5 @@
 import os
-from psychopy import event, visual, core
+from psychopy import event, core
 
 def skip():
     pass
