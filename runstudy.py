@@ -6,6 +6,7 @@ from psychopy import visual, core, event, data, gui, logging, monitors, sound
 
 from importlib import reload
 from exp import instruct, utils
+from tasks import stroop
 reload(instruct)
 reload(utils)
 
@@ -20,6 +21,8 @@ exp_objects['mouse'].setVisible(0)  # make mouse invisible
 
 exp_objects["txt_space_continue"] = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text="Press space to continue", height=0.04, wrapWidth=1.4, pos=[0.0, 0.0])
 exp_objects["txt_instructions"] = visual.TextStim(win=exp_objects['win'], units='norm', colorSpace='rgb', color=[1, 1, 1], font='Verdana', text='DEFAULT', height=0.08, wrapWidth=1.4, pos=[0.0, 0.5])
+
+stroop.run_task(exp_objects)
 
 instructions = instruct.Instructions(exp_objects, ["hey11", "hey12", "hey13"])
 instructions.show_wait()
