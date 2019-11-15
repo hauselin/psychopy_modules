@@ -1,5 +1,7 @@
 # exp for psychopy
 
+Tested in the following PsychoPy versions: **3.1.2**
+
 `exp`: modules for running experiments/tasks
 
 `extra`: other stuff not required for the library
